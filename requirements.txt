@@ -3,3 +3,7 @@ djangorestframework
 markdown
 django-filter
 python-decouple
+djoser
+djangorestframework-simplejwt[crypto]
+#django-rest-swagger
+drf-yasg[validation]
