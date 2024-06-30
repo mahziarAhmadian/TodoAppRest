@@ -9,22 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: mysql:latest
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: test_user
-          MYSQL_PASSWORD: test_pass
-          MYSQL_ROOT_PASSWORD: root_pass
-        options: >-
-          --health-cmd "mysqladmin ping --silent"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -39,13 +23,6 @@ jobs:
 
     - name: Build and run services
       run: docker-compose up -d --build
-
-    - name: Wait for MySQL to be ready
-      run: |
-        until docker-compose exec db mysqladmin ping --silent; do
-          echo "Waiting for mysql..."
-          sleep 1
-        done
 
     - name: Run Tests
       run: docker-compose exec web pytest
