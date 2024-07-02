@@ -9,3 +9,4 @@ djangorestframework-simplejwt[crypto]
 drf-yasg[validation]
 pytest
 pytest-django
+Faker
