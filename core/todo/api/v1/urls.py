@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import TaskModelViewSet
-
+from .views import WeatherGenericAPIView
 app_name = "api-v1"
 
 urlpatterns = [
@@ -16,4 +16,6 @@ urlpatterns = [
         'delete': 'destroy',
     }),
          name="task-detail"),
+
+    path('weather/information/', WeatherGenericAPIView.as_view(), name="weather-detail"),
 ]
