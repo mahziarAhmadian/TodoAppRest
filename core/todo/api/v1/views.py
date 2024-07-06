@@ -32,7 +32,7 @@ class WeatherGenericAPIView(generics.RetrieveAPIView):
             print(f"Error fetching weather data: {e}")
             return {"error": "Failed to fetch weather data"}
 
-    @method_decorator(cache_page(60 * 5))
+    @method_decorator(cache_page(60 * 20))
     def get(self, request, *args, **kwargs):
         weather_detail = self.get_weather_information_open_weather()
         return Response(data=weather_detail)
