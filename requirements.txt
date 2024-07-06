@@ -11,6 +11,7 @@ pytest
 pytest-django
 Faker
 celery
-redis
+#redis
 django-celery-beat
 django-redis
+gunicorn
