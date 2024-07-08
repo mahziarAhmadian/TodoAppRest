@@ -30,7 +30,7 @@ jobs:
         run: docker-compose exec -T todo_backend pytest
 
 
-  deploy :
+  deploy:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     name: Deploy
     needs: test
