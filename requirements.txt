@@ -10,3 +10,8 @@ drf-yasg[validation]
 pytest
 pytest-django
 Faker
+celery
+#redis
+django-celery-beat
+django-redis
+gunicorn

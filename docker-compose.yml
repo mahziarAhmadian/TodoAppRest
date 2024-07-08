@@ -1,6 +1,14 @@
 version: "3.9"
 
 services:
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+
   todo_backend:
     build: .
     container_name: todo_backend
@@ -13,3 +21,23 @@ services:
       - SECRET_KEY=test
       - DEBUG=True
       - ALLOWED_HOSTS=*,
+    depends_on:
+      - redis
+
+  worker:
+    build: .
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - ./core:/app
+    depends_on:
+      - redis
+      - todo_backend
+
+  beat:
+    build: .
+    command: celery -A core beat --loglevel=info
+    volumes:
+      - ./core:/app
+    depends_on:
+      - redis
+      - todo_backend
